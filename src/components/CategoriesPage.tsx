@@ -40,7 +40,9 @@ const CategoriesPage: React.FC = () => {
             }
             dispatch(updateCategory(currentCategory));
         } else {
-            dispatch(addCategory(currentCategory.name));
+            if (!categories.some(category => category.name === currentCategory.name)) {
+                dispatch(addCategory(currentCategory.name));
+            }
         }
         setIsModalOpen(false);
     };

@@ -33,7 +33,9 @@ const categoriesSlice = createSlice({
     initialState,
     reducers: {
         addCategory: (state, action: PayloadAction<string>) => {
-            state.categories.push({ id: uuidv4(), name: action.payload });
+            if (!state.categories.some(category => category.name === action.payload)) {
+                state.categories.push({ id: uuidv4(), name: action.payload });
+            }
         },
         removeCategory: (state, action: PayloadAction<string>) => {
             state.categories = state.categories.filter(category => category.id !== action.payload);
